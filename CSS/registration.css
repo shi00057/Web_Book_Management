@@ -1,0 +1,171 @@
+/*  
+     Name: web group
+     File Name: styles.css
+     Date Created: 2024-07-18
+     Description: This CSS file provides the styling for the registration form.
+                  It includes styles for the body, form container, text fields, checkboxes, 
+                  and buttons to ensure a consistent and visually appealing layout.
+*/
+
+/* Apply global styles to the body element */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e8f0fe; /* Lighter background color for a cleaner look */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column; /* Arrange content vertically */
+    align-items: center; /* Center align content horizontally */
+    justify-content: center; /* Center content vertically */
+    min-height: 100vh; /* Ensure the body takes full viewport height */
+}
+
+/* Style for the header section */
+header {
+    width: 100%;
+    text-align: center;
+    padding: 20px 0; /* Padding around the header content */
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Add a subtle shadow for separation */
+    margin-bottom: 20px;
+}
+
+header h1 {
+    font-family: Arial, sans-serif;
+    font-size: 2.5em;
+    color: #333;
+    margin: 0;
+}
+
+header .tagline {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.2em;
+    color: #666;
+    margin-top: 5px;
+    font-style: italic;
+}
+
+/* Style for the form container */
+.formcontainer {
+    width: 90%;
+    max-width: 450px; /* Set a maximum width for larger screens */
+    margin: 20px auto; /* Center align the container */
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 10px;
+    text-align: left; /* Align text to the left for better readability */
+}
+
+/* Style for the main heading (h1) */
+.formcontainer h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8em; /* Slightly smaller font for the form heading */
+}
+
+/* Style for horizontal rules (hr) */
+hr {
+    border: 0;
+    height: 1px;
+    background-color: #ddd;
+    margin: 20px 0;
+}
+
+/* Style for text fields */
+.textfield {
+    margin-bottom: 15px;
+}
+
+.textfield label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.textfield input[type="text"],
+.textfield input[type="password"],
+.textfield input[type="email"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Style for checkboxes */
+.checkbox {
+    margin-bottom: 15px;
+    display: flex; /* Flexbox layout for checkbox alignment */
+    align-items: center; /* Center align checkbox and label vertically */
+}
+
+.checkbox input {
+    margin-right: 10px; /* Space between checkbox and label */
+}
+
+.checkbox label {
+    color: #333;
+}
+
+/* Style for submit and reset buttons */
+button[type="submit"],
+button[type="reset"] {
+    width: 48%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow for a raised effect */
+}
+
+button[type="submit"] {
+    background-color: #007bff;
+    color: white;
+    margin-right: 4%; /* Space between the two buttons */
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+button[type="reset"] {
+    background-color: #dc3545;
+    color: white;
+    transition: background-color 0.3s ease; /* Smooth transition effect */
+}
+
+button[type="reset"]:hover {
+    background-color: #c82333; /* Darker red on hover */
+}
+
+.error-message-inline {
+    display: inline-block;
+    margin-left: 10px;
+    color: red;
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+/* Styles for the footer section */
+footer {
+    width: 100%;
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    font-size: 0.9em;
+    color: #333;
+    position: fixed; /* Fixed at the bottom of the page */
+    bottom: 0;
+    left: 0;
+}
+
+footer p {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}

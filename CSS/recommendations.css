@@ -1,0 +1,77 @@
+/* Style for the body of the document */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(to bottom, #d0e6f5, #f5d0d0);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+/* Style for the main heading */
+h1 {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+/* Style for the book display area */
+#book_screen {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    margin-bottom: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Style for the book title */
+#book_title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Style for the book author */
+#book_author {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Style for the book genre */
+#book_genre {
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+/* Style for the book description */
+#book_description {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Style for the button */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    box-shadow: 0 4px #0056b3;
+    font-family: Arial, sans-serif;
+}
+
+/* Style for the button on hover */
+button:hover {
+    background-color: #0056b3;
+    box-shadow: 0 4px #004080;
+}
