@@ -162,7 +162,6 @@ $sql1->execute();
 if ($sql1->rowCount() > 0) {
     $results = $sql1->fetchAll(PDO::FETCH_ASSOC);
     $bookInformation = '';
-// 输出查询结果
     foreach ($results as $book) {
         echo "<script>document.getElementById(\"title\").innerHTML = '{$book['title']}';
 document.getElementById(\"author\").innerHTML = '{$book['author']}';
@@ -178,7 +177,6 @@ $sql2->execute();
 if ($sql2->rowCount() > 0) {
     $results = $sql2->fetchAll(PDO::FETCH_ASSOC);
     $reviewContent = '';
-// 输出查询结果
     foreach ($results as $review) {
         $rating = $review['rating'];
         $comment = $review['comment'];

@@ -38,7 +38,6 @@ $sql->execute();
 if ($sql->rowCount() > 0) {
     $results = $sql->fetchAll(PDO::FETCH_ASSOC);
     $bookListContent = '';
-// 输出查询结果
     foreach ($results as $book) {
         $bookListContent .= "<div id=\"favorite{$book['id']}\" class=\"box\"><div class=\"item\">Title: {$book['title']}</div><div class=\"item\">Author: {$book['author']}</div><div class=\"item\">Genre: {$book['genre']}</div><div class=\"item\">Description: {$book['description']}</div><button onclick=\"deleteFavorite({$book['id']})\">delete favorite</button></div>";
     }

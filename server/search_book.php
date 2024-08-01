@@ -46,11 +46,9 @@ $author = isset($_GET['author']) ? $_GET['author'] : '';
 $genre = isset($_GET['genre']) ? $_GET['genre'] : '';
 $database = new Database();
 $db = $database->getConnection();
-// 初始化 SQL 查询和条件数组
 $sql = "SELECT * FROM books WHERE 1=1";
 $params = [];
 
-// 动态添加条件
 if (!empty($title)) {
     $sql .= " AND title LIKE :title";
     $params[':title'] = "%$title%";
@@ -75,7 +73,6 @@ $stmt->execute();
 $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $bookListContent = '';
-// 输出查询结果
 foreach ($results as $book) {
     $bookListContent .= "<div class=\"box\"><div class=\"item\">Title: {$book['title']}</div><div class=\"item\">Author: {$book['author']}</div><div class=\"item\">Genre: {$book['genre']}</div><div class=\"item\">Description: {$book['description']}</div><button type=\"button\" onclick=\"detail({$book['id']})\">Detail</button><button id=\"favorite{$book['id']}\" onclick=\"favorite({$book['id']})\">favorite</button></div>";
 }
