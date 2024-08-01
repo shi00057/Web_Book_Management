@@ -77,7 +77,7 @@ $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 $bookListContent = '';
 // 输出查询结果
 foreach ($results as $book) {
-    $bookListContent .= "<div class=\"box\"><div class=\"item\">Title: {$book['title']}</div><div class=\"item\">Author: {$book['author']}</div><div class=\"item\">Genre: {$book['genre']}</div><div class=\"item\">Description: {$book['description']}</div><button id=\"favorite{$book['id']}\" onclick=\"favorite({$book['id']})\">favorite</button></div>";
+    $bookListContent .= "<div class=\"box\"><div class=\"item\">Title: {$book['title']}</div><div class=\"item\">Author: {$book['author']}</div><div class=\"item\">Genre: {$book['genre']}</div><div class=\"item\">Description: {$book['description']}</div><button type=\"button\" onclick=\"detail({$book['id']})\">Detail</button><button id=\"favorite{$book['id']}\" onclick=\"favorite({$book['id']})\">favorite</button></div>";
 }
 echo "<script>document.getElementById(\"bookList\").innerHTML = '$bookListContent';</script>";
 ?>
@@ -113,5 +113,10 @@ if ($sql->rowCount() > 0) {
         };
         xhr.send("book_id=" + bookId);
     }
+
+    function detail(bookId) {
+        window.open('detail.php?book_id='+bookId, '_blank');
+    }
+
 </script>
 
