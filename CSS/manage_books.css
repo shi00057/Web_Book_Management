@@ -1,0 +1,123 @@
+/*
+    Name: SHOUJUN ZHAO
+    File Name: manage_books.css
+    Date: August 1, 2024
+    Description: Assignment 2, add some CSS styling for a a Book Cataloging System
+    */
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif; /* Set font family */
+    margin: 20px; /* Add margin around the body */
+    background-color: #f4f4f9; /* Set background color */
+}
+
+/* Header styling */
+h1 {
+    font-size: 24px; /* Set font size for headers */
+    color: #333; /* Set header color */
+}
+
+/* Form styling */
+form {
+    margin-bottom: 20px; /* Add margin at the bottom of forms */
+    background-color: #fff; /* Set background color */
+    padding: 20px; /* Add padding */
+    border: 1px solid #ddd; /* Add border */
+    border-radius: 8px; /* Add border radius */
+}
+
+/* Label styling */
+label {
+    display: block; /* Display labels as block elements */
+    margin: 10px 0 5px; /* Add margin around labels */
+    font-weight: bold; /* Set labels to be bold */
+}
+
+/* Input and textarea styling */
+input[type="text"], textarea {
+    width: 50%; /* Set width to 50% for text inputs */
+    padding: 10px; /* Add padding */
+    margin-bottom: 10px; /* Add margin at the bottom */
+    border: 1px solid #ddd; /* Add border */
+    border-radius: 4px; /* Add border radius */
+    box-sizing: border-box; /* Set box-sizing to border-box */
+}
+
+textarea {
+    width: 80%; /* Set width to 80% for textarea */
+    height: 200px; /* Set height to 200px */
+}
+
+/* Button styling */
+button {
+    padding: 10px 15px; /* Add padding */
+    margin-right: 10px; /* Add margin to the right */
+    background-color: #5cb85c; /* Set background color */
+    color: #fff; /* Set text color */
+    border: none; /* Remove border */
+    border-radius: 4px; /* Add border radius */
+    cursor: pointer; /* Set cursor to pointer */
+}
+
+button[type="reset"] {
+    background-color: #d9534f; /* Set background color for reset button */
+}
+
+button:hover {
+    opacity: 0.8; /* Set hover effect */
+}
+
+/* Table styling */
+table {
+    width: 100%; /* Set width to 100% */
+    border-collapse: collapse; /* Collapse table borders */
+    margin-top: 20px; /* Add margin at the top */
+    background-color: #fff; /* Set background color */
+    border: 1px solid #ddd; /* Add border */
+    border-radius: 8px; /* Add border radius */
+    overflow: hidden; /* Hide overflow */
+}
+
+/* Table header and cell styling */
+th, td {
+    border: 1px solid #ddd; /* Add border to table cells */
+    padding: 12px; /* Add padding */
+    text-align: left; /* Align text to the left */
+}
+
+th {
+    background-color: #f2f2f2; /* Set background color for table headers */
+}
+
+td {
+    background-color: #fff; /* Set background color for table cells */
+}
+
+/* Link styling */
+a {
+    color: #5bc0de; /* Set link color */
+    text-decoration: none; /* Remove underline from links */
+    font-weight: bold; /* Set link font weight */
+    margin-right: 10px; /* Add margin to the right */
+}
+
+a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+/* Home link styling */
+.home-link {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #5bc0de;
+    color: #fff;
+    border-radius: 4px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.home-link:hover {
+    background-color: #31b0d5;
+}

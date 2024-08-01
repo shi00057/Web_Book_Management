@@ -22,7 +22,7 @@ class UserDAO {
         return false;
     }
 
-    // 根据用户ID获取用户名的方法
+    
     public function getUserNameById($userId) {
         $query = "SELECT username FROM " . $this->table_name . " WHERE id = ?";
         $stmt = $this->conn->prepare($query);
