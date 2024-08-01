@@ -45,7 +45,7 @@ $user_name = $user_name ? $user_name : "Guest";
             <ul>
                 <li><a href="search_book.php">Search Books</a></li>
                 <li><a href="recommendations.php">Recommendations</a></li>
-                <li><a href="manage_books.php">Manage Books</a></li>
+                <li><a href="list_books.php">Manage Books</a></li>
                 <li><a href="favorite_list.php">Favorite List</a></li>
                 <li><a href="logout.php">Logout</a></li>
             </ul>
@@ -65,7 +65,7 @@ $user_name = $user_name ? $user_name : "Guest";
             <div class="box green">
                 <h2>Manage Books</h2>
                 <p>Add, edit, or remove books from your personal library collection.</p>
-                <a href="manage_books.php">Manage Library</a>
+                <a href="list_books.php">Manage Library</a>
             </div>
             <div class="box yellow">
                 <h2>Favorite List</h2>
