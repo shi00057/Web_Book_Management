@@ -1,0 +1,170 @@
+/* styles.css */
+.rating {
+    direction: rtl; /* Right-to-left for easier hover effects */
+    display: inline-block;
+}
+
+.rating span {
+    font-size: 2rem;
+    color: #ddd; /* Light color for unselected stars */
+    cursor: pointer;
+}
+
+.rating span:hover,
+.rating span.hover,
+.rating span.selected {
+    color: #ffcc00; /* Color for selected stars */
+}
+
+.rating span.selected {
+    color: #ffcc00; /* Color for selected stars */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+div {
+    margin-bottom: 20px;
+}
+
+#bookInformation {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#bookInformation div {
+    margin-bottom: 10px;
+}
+
+#bookInformation span {
+    font-weight: bold;
+}
+
+#ratingDiv {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    margin-top: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    resize: none;
+}
+
+button {
+    display: block;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+hr {
+    margin: 20px 0;
+    border: 1px solid #e9ecef;
+}
+
+#reviews {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#reviews .box {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+#reviews .box:last-child {
+    border-bottom: none;
+}
+
+#reviews .item {
+    margin-bottom: 5px;
+}
+
+/* Styles for the header title */
+header h1 {
+    font-family: Arial, sans-serif; /* Font style */
+    font-size: 2.5em; /* Font size */
+    color: #333; /* Text color */
+    text-align: center; /* Center align text */
+    margin: 20px 0; /* Margin above and below */
+}
+
+/* Styles for the tagline section */
+header .tagline {
+    font-family: 'Courier New', Courier, monospace; /* Font style */
+    font-size: 1.2em; /* Font size */
+    color: #666; /* Text color */
+    text-align: center; /* Center align text */
+    margin-bottom: 30px; /* Bottom margin */
+    font-style: italic; /* Italic text */
+}
+
+/* Styles for the footer section */
+footer {
+    background-color: #f1f1f1; /* Background color */
+    padding: 20px; /* Padding inside the footer */
+    text-align: center; /* Center align text */
+    border-top: 1px solid #ccc; /* Top border */
+    font-size: 0.9em; /* Font size */
+    color: #333; /* Text color */
+}
+
+footer p {
+    margin: 0; /* Remove default margin */
+    font-family: Arial, sans-serif; /* Font style */
+}
+
+.nav-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    padding: 20px; /* Optional: for spacing */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Ensure items are aligned horizontally */
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}

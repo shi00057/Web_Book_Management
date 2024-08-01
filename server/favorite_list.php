@@ -58,6 +58,5 @@ if ($sql->rowCount() > 0) {
         };
         xhr.send("book_id=" + bookId);
         document.getElementById("favorite" + bookId).style.display = "none";
-        ;
     }
 </script>
