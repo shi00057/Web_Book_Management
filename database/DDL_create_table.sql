@@ -45,3 +45,12 @@ CREATE TABLE favorites (
     book_id INT NOT NULL,
     PRIMARY KEY (user_id, book_id)
 );
+
+-- Creat the book_shelf table
+
+CREATE TABLE book_shelf (
+    id INT NOT NULL AUTO_INCREMENT,
+    user_id INT NOT NULL,
+    book_id INT NOT NULL,
+	PRIMARY KEY (id)
+);

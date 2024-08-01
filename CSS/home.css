@@ -1,100 +1,131 @@
-/* Container for the flexbox items */
-.container {
-    display: flex;
-    justify-content: center; /* Center align the flex items horizontally */
-    align-items: center; /* Center align the flex items vertically */
-    flex-wrap: wrap;
-    padding: 20px;
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* Each box in the flex container */
-.box {
-    width: 200px;
-    margin: 10px;
-    padding: 20px;
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Background color for the body */
+    padding-top: 20px; /* Optional: Add some top padding for spacing */
+}
+
+/* Header styles */
+header {
     text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin-bottom: 5px;
+    color:blue;
 }
 
-/* Box colors */
-.red { background-color: #ffdddd; }
-.blue { background-color: #ddddff; }
-.green { background-color: #ddffdd; }
-.yellow { background-color: #ffffdd; }
-.orange { background-color: #ffebcd; }
-
-/* Link style in the boxes */
-.box a {
-    display: inline-block;
-    margin-top: 10px;
-    padding: 5px 10px;
-    color: #fff;
-    background-color: #333;
-    border-radius: 4px;
-    text-decoration: none;
+header h1 {
+    font-size: 2.5em; /* Header title size */
+    color: #1042d6;
+    margin-bottom: 5px;
 }
 
-/* Additional styles for the navigation menu */
-nav ul {
+header .tagline {
+    font-size: 1.2em;
+    color: #666;
+    font-style: italic;
+}
+
+/* Navigation styles */
+nav.main-nav {
+    margin-top: -10px; /* Adjust as needed to align higher */
+    text-align: center;
+}
+
+nav.main-nav ul {
     list-style: none;
     padding: 0;
 }
 
-nav ul li {
+nav.main-nav ul li {
     display: inline;
-    margin: 0 10px;
+    margin: 0 15px;
 }
 
-nav ul li a {
+nav.main-nav ul li a {
     text-decoration: none;
     color: #007BFF;
+    font-size: 1.1em;
 }
 
-nav ul li a:hover {
+nav.main-nav ul li a:hover {
     text-decoration: underline;
 }
 
-/* Styles for the header title */
-header h1 {
-    font-family: Arial, sans-serif; /* Font style */
-    font-size: 2.5em; /* Font size */
-    color: #333; /* Text color */
-    text-align: center; /* Center align text */
-    margin: 20px 0; /* Margin above and below */
+/* Main content styles */
+.home-content {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align items to the top */
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+    min-height: 80vh; /* Ensure the content fills the screen */
 }
 
-/* Styles for the tagline section */
-header .tagline {
-    font-family: 'Courier New', Courier, monospace; /* Font style */
-    font-size: 1.2em; /* Font size */
-    color: #666; /* Text color */
-    text-align: center; /* Center align text */
-    margin-bottom: 30px; /* Bottom margin */
-    font-style: italic; /* Italic text */
+.main-title {
+    font-size: 3em; /* Increase font size for the main title */
+    color: #333;
+    margin-bottom: 20px;
+    font-weight: bold;
 }
 
-/* Styles for the footer section */
+.welcome-message {
+    font-size: 1.8em; /* Larger font size for welcome message */
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Container for the flexbox items */
+.container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+/* Each box in the flex container */
+.box {
+    width: 220px;
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.red { background-color: #f8d7da; }
+.blue { background-color: #d1ecf1; }
+.green { background-color: #d4edda; }
+.yellow { background-color: #fff3cd; }
+
+.box a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    color: #fff;
+    background-color: #333;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Footer styles */
 footer {
-    background-color: #f1f1f1; /* Background color */
-    padding: 20px; /* Padding inside the footer */
-    text-align: center; /* Center align text */
-    border-top: 1px solid #ccc; /* Top border */
-    font-size: 0.9em; /* Font size */
-    color: #333; /* Text color */
+    background-color: #f1f1f1;
+    padding: 10px 20px;
+    text-align: center;
+    border-top: 1px solid #ccc;
+    font-size: 0.9em;
+    color: #333;
+    margin-top: 20px; /* Add some space above the footer */
 }
 
 footer p {
-    margin: 0; /* Remove default margin */
-    font-family: Arial, sans-serif; /* Font style */
-}
-
-/* Styles for home-content to center it */
-.home-content {
-    display: flex; /* Use flexbox for centering */
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    flex-direction: column; /* Align children vertically */
-    height: 100vh; /* Full viewport height */
-    text-align: center; /* Center text inside home-content */
+    margin: 0;
 }

@@ -26,7 +26,6 @@ $user_name = $user_name ? $user_name : "Guest";
 ?>
 
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -38,10 +37,7 @@ $user_name = $user_name ? $user_name : "Guest";
 <body>
     <?php include('header.php'); ?>
     <div class="home-content">
-        <h1>Welcome to the Book Cataloging System</h1>
-        <p>Welcome back, <?php echo htmlspecialchars($user_name); ?>!</p>
-        
-        <nav>
+    <nav class="main-nav">
             <ul>
                 <li><a href="search_book.php">Search Books</a></li>
                 <li><a href="recommendations.php">Recommendations</a></li>
@@ -50,7 +46,10 @@ $user_name = $user_name ? $user_name : "Guest";
                 <li><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
-
+        <h1 class="main-title">Welcome to the Book Cataloging System</h1>
+        <p class="welcome-message">Welcome back, <?php echo htmlspecialchars($user_name); ?>!</p>
+        
+        
         <div class="container">
             <div class="box red">
                 <h2>Search Books</h2>
