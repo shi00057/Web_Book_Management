@@ -1,8 +1,9 @@
- <?php
+<?php
+session_start();
 
 /*
     Author: SHOUJUN ZHAO
-    File Name: list_books.php
+    File Name: manage_books.php
     Date: August 1, 2024
     Description: Assignment 2, List books in a Book Cataloging System
 */
@@ -13,11 +14,12 @@ require_once './Dao/db_connection.php';
 // Instantiate the Database class and get the database connection
 $database = new Database();
 $conn = $database->getConnection();
+$user_id = $_SESSION['user_id'];
 
-// Prepare the SQL statement to fetch all books from the database
-$sql = "SELECT * FROM books";
+// Prepare the SQL statement to fetch all books from the database that the user has added
+$sql = "SELECT b.* FROM books b JOIN book_shelf bs ON b.id = bs.book_id WHERE bs.user_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->execute();
+$stmt->execute([$user_id]);
 
 // Fetch all books and store them in an associative array
 $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -32,6 +34,18 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
     <link rel="stylesheet" href="../CSS/manage_books.css">
 </head>
 <body>
+    <?php include('header.php'); ?>
+    <div class="nav-container">
+        <nav>
+            <ul>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="recommendations.php">Recommendations</a></li>
+                <li><a href="manage_books.php">Manage Books</a></li>
+                <li><a href="favorite_list.php">Favorite List</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
     <h1>Book List</h1>
     <!-- Table to display the list of books -->
     <table id="bookTable">
@@ -67,8 +81,8 @@ $books = $stmt->fetchAll(PDO::FETCH_ASSOC);
         </tbody>
     </table>
     <a href="add_book.php">Add New Book</a>
-    <a href="home.php" class="home-link">Home</a>
+    <a href="search_book.php" class="search-link">Search Books</a>
     <script src="../Scripts/manage_books.js"></script>
+    <?php include('footer.php'); ?>
 </body>
 </html>
-

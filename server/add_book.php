@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /*
     Author: SHOUJUN ZHAO
@@ -21,6 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $author = $_POST['author'];
     $genre = $_POST['genre'];
     $description = $_POST['description'];
+    $user_id = $_SESSION['user_id'];
 
     // Prepare the SQL statement to insert a new book into the database
     $sql = "INSERT INTO books (title, author, genre, description) VALUES (?, ?, ?, ?)";
@@ -28,6 +30,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Execute the statement with the form data
     $stmt->execute([$title, $author, $genre, $description]);
+
+    // Get the last inserted book ID
+    $book_id = $conn->lastInsertId();
+
+    // Insert into book_shelf to associate the book with the user
+    $sql = "INSERT INTO book_shelf (user_id, book_id) VALUES (?, ?)";
+    $stmt = $conn->prepare($sql);
+    $stmt->execute([$user_id, $book_id]);
 
     // Output a success message
     echo "Book added successfully!";
@@ -44,6 +54,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="../CSS/manage_books.css">
 </head>
 <body>
+    <?php include('header.php'); ?>
+    <div class="nav-container">
+        <nav>
+            <ul>
+                <li><a href="home.php">Home</a></li>
+                <li><a href="recommendations.php">Recommendations</a></li>
+                <li><a href="manage_books.php">Manage Books</a></li>
+                <li><a href="favorite_list.php">Favorite List</a></li>
+                <li><a href="logout.php">Logout</a></li>
+            </ul>
+        </nav>
+    </div>
     <h1>Add Book</h1>
     <!-- Form for adding a new book -->
     <form id="addBookForm" method="post" action="add_book.php">
@@ -58,7 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <button type="submit">Add Book</button>
         <button type="reset">Reset</button>
     </form>
-    <a href="list_books.php">Back to Book List</a>
+    <a href="manage_books.php">Back to Book List</a>
     <script src="../Scripts/manage_books.js"></script>
+    <?php include('footer.php'); ?>
 </body>
 </html>

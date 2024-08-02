@@ -1,21 +1,36 @@
 /*
-    Name: SHOUJUN ZHAO
+    Author: SHOUJUN ZHAO
     File Name: manage_books.css
     Date: August 1, 2024
     Description: Assignment 2, add some CSS styling for a a Book Cataloging System
-    */
+*/
 
 /* General body styling */
 body {
-    font-family: Arial, sans-serif; /* Set font family */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Set font family */
     margin: 20px; /* Add margin around the body */
     background-color: #f4f4f9; /* Set background color */
+    color: #333; /* Set text color */
 }
 
-/* Header styling */
-h1 {
-    font-size: 24px; /* Set font size for headers */
-    color: #333; /* Set header color */
+/* Header styles */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #1042d6;
+    color: #fff;
+    border-radius: 8px;
+}
+
+header h1 {
+    font-size: 2.5em; /* Header title size */
+    margin-bottom: 5px;
+}
+
+header .tagline {
+    font-size: 1.2em;
+    font-style: italic;
 }
 
 /* Form styling */
@@ -25,6 +40,7 @@ form {
     padding: 20px; /* Add padding */
     border: 1px solid #ddd; /* Add border */
     border-radius: 8px; /* Add border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
 /* Label styling */
@@ -32,21 +48,23 @@ label {
     display: block; /* Display labels as block elements */
     margin: 10px 0 5px; /* Add margin around labels */
     font-weight: bold; /* Set labels to be bold */
+    color: #555; /* Set label color */
 }
 
 /* Input and textarea styling */
 input[type="text"], textarea {
-    width: 50%; /* Set width to 50% for text inputs */
+    width: 100%; /* Set width to 100% for text inputs */
     padding: 10px; /* Add padding */
     margin-bottom: 10px; /* Add margin at the bottom */
     border: 1px solid #ddd; /* Add border */
     border-radius: 4px; /* Add border radius */
     box-sizing: border-box; /* Set box-sizing to border-box */
+    font-size: 1em; /* Set font size */
 }
 
 textarea {
-    width: 80%; /* Set width to 80% for textarea */
-    height: 200px; /* Set height to 200px */
+    width: 100%; /* Set width to 100% for textarea */
+    height: 150px; /* Set height to 150px */
 }
 
 /* Button styling */
@@ -58,6 +76,7 @@ button {
     border: none; /* Remove border */
     border-radius: 4px; /* Add border radius */
     cursor: pointer; /* Set cursor to pointer */
+    font-size: 1em; /* Set font size */
 }
 
 button[type="reset"] {
@@ -77,6 +96,7 @@ table {
     border: 1px solid #ddd; /* Add border */
     border-radius: 8px; /* Add border radius */
     overflow: hidden; /* Hide overflow */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
 }
 
 /* Table header and cell styling */
@@ -84,6 +104,7 @@ th, td {
     border: 1px solid #ddd; /* Add border to table cells */
     padding: 12px; /* Add padding */
     text-align: left; /* Align text to the left */
+    font-size: 1em; /* Set font size */
 }
 
 th {
@@ -96,7 +117,7 @@ td {
 
 /* Link styling */
 a {
-    color: #5bc0de; /* Set link color */
+    color: #007BFF; /* Set link color */
     text-decoration: none; /* Remove underline from links */
     font-weight: bold; /* Set link font weight */
     margin-right: 10px; /* Add margin to the right */
@@ -106,8 +127,8 @@ a:hover {
     text-decoration: underline; /* Add underline on hover */
 }
 
-/* Home link styling */
-.home-link {
+/* Search link styling */
+.search-link {
     display: inline-block;
     padding: 10px 15px;
     background-color: #5bc0de;
@@ -118,6 +139,51 @@ a:hover {
     margin-top: 20px;
 }
 
-.home-link:hover {
+.search-link:hover {
     background-color: #31b0d5;
+}
+
+/* Navigator link styling */
+.nav-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    padding: 20px; /* Optional: for spacing */
+    background-color: #1042d6; /* Set background color */
+    border-radius: 8px; /* Add border radius */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add shadow */
+    margin-bottom: 20px; /* Add margin at the bottom */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Ensure items are aligned horizontally */
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+    padding: 10px 15px;
+    display: block;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #007bff;
+}
+
+/* Footer styling */
+footer {
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #1042d6;
+    color: #fff;
+    border-radius: 8px;
 }

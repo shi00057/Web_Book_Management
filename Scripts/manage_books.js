@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.text()) // Parse the response text
             .then(message => {
                 alert(message); // Display the response message
-                location.href = 'list_books.php'; // Redirect to the book list page
+                location.href = 'manage_books.php'; // Redirect to the book list page
             });
         });
     }
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
             .then(response => response.text()) // Parse the response text
             .then(message => {
                 alert(message); // Display the response message
-                location.href = 'list_books.php'; // Redirect to the book list page
+                location.href = 'manage_books.php'; // Redirect to the book list page
             });
         });
     }
@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .then(response => response.text()) // Parse the response text
                 .then(message => {
                     alert(message); // Display the response message
-                    location.href = 'list_books.php'; // Redirect to the book list page
+                    location.href = 'manage_books.php'; // Redirect to the book list page
                 });
             }
         });
