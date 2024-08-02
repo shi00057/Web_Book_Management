@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /*
     Author: SHOUJUN ZHAO
@@ -18,17 +19,32 @@ $conn = $database->getConnection();
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the book ID from the POST request
     $id = $_POST['id'];
+    $user_id = $_SESSION['user_id'];
 
-    // Prepare the SQL statement to delete the book from the database
-    $sql = "DELETE FROM books WHERE id = ?";
+    // Check if the user has permission to delete this book
+    $sql = "SELECT * FROM book_shelf WHERE user_id = ? AND book_id = ?";
     $stmt = $conn->prepare($sql);
+    $stmt->execute([$user_id, $id]);
+    $book_shelf = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    // Execute the statement with the book ID
-    $stmt->execute([$id]);
+    if ($book_shelf) {
+        // Prepare the SQL statement to delete the book from the database
+        $sql = "DELETE FROM books WHERE id = ?";
+        $stmt = $conn->prepare($sql);
 
-    // Output a success message
-    echo "Book deleted successfully!";
+        // Execute the statement with the book ID
+        $stmt->execute([$id]);
+
+        // Also delete from book_shelf
+        $sql = "DELETE FROM book_shelf WHERE book_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute([$id]);
+
+        // Output a success message
+        echo "Book deleted successfully!";
+    } else {
+        echo "You do not have permission to delete this book.";
+    }
     exit;
 }
 ?>
-
