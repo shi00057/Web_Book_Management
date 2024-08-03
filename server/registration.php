@@ -4,13 +4,16 @@
 // Date Created: 2024-07-18
 // Description: This PHP file handles user registration, including form validation and database insertion.
 
+session_start();
+
 include 'Dao/db_connection.php';
+include 'Dao/UserDAO.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $username = $_POST['login'];
-    $password = $_POST['pass'];
-    $password2 = $_POST['pass2'];
+    $email = trim($_POST['email']);
+    $username = trim($_POST['login']);
+    $password = trim($_POST['pass']);
+    $password2 = trim($_POST['pass2']);
 
     // Validate inputs
     if (empty($email) || empty($username) || empty($password) || empty($password2)) {
@@ -22,34 +25,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         // Get database connection
         $database = new Database();
-        $mysqli = $database->getConnection();
+        $pdo = $database->getConnection();
+        $userDAO = new UserDAO($pdo);
 
         // Check if user already exists
-        $checkUser = $mysqli->prepare("SELECT * FROM users WHERE email = ?");
-        $checkUser->bind_param("s", $email);
-        $checkUser->execute();
-        $result = $checkUser->get_result();
+        $checkUser = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $checkUser->execute([$email]);
+        $result = $checkUser->fetch(PDO::FETCH_ASSOC);
 
-        if ($result->num_rows > 0) {
+        if ($result) {
             $error = "User already exists.";
         } else {
-            // Hash the password before storing it
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
             // Insert new user into the database
-            $stmt = $mysqli->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $username, $email, $hashedPassword);
-            if ($stmt->execute()) {
+            $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+            if ($stmt->execute([$username, $email, $password])) {
+                // Set session variables
+                $_SESSION['user_id'] = $pdo->lastInsertId();
+                $_SESSION['username'] = $username;
+                $_SESSION['email'] = $email;
                 $success = "Registration successful! Redirecting to homepage...";
-                header("refresh:3;url=home.php"); // Redirect after 3 seconds
+                header("Location: home.php");
                 exit();
             } else {
-                $error = "Error: " . $stmt->error;
+                $error = "Error: " . $stmt->errorInfo()[2];
             }
-            $stmt->close();
         }
-        $checkUser->close();
-        $mysqli->close();
     }
 }
 ?>
@@ -66,42 +66,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
     <?php include('header.php'); ?>
     <div class="formcontainer">
-        <h1>Register for Book Cataloging System</h1>
+        <h1>Weekly Kitten Pictures Subscription</h1>
         <hr>
         <form action="registration.php" method="post" onsubmit="return validate();">
             <?php if (isset($error)): ?>
-                <p class="error-message"><?php echo $error; ?></p>
+                <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
             <?php elseif (isset($success)): ?>
-                <p class="success-message"><?php echo $success; ?></p>
+                <p class="success-message"><?php echo htmlspecialchars($success); ?></p>
             <?php endif; ?>
 
             <div class="textfield">
                 <label for="email">Email Address</label>
-                <input type="email" name="email" id="email" placeholder="Email" required>
+                <input type="email" name="email" id="email" placeholder="Email">
             </div>
 
             <div class="textfield">
                 <label for="login">User Name</label>
-                <input type="text" name="login" id="login" placeholder="User name" required>
+                <input type="text" name="login" id="login" placeholder="User name">
             </div>
 
             <div class="textfield">
                 <label for="pass">Password</label>
-                <input type="password" name="pass" id="pass" placeholder="Password" required>
+                <input type="password" name="pass" id="pass" placeholder="Password">
             </div>
         
             <div class="textfield">
                 <label for="pass2">Re-type Password</label>
-                <input type="password" name="pass2" id="pass2" placeholder="Re-type Password" required>
+                <input type="password" name="pass2" id="pass2" placeholder="Re-type Password">
             </div>
 
             <div class="checkbox">
                 <input type="checkbox" name="newsletter" id="newsletter">
-                <label for="newsletter">I agree to receive the newsletter</label>
+                <label for="newsletter">I agree to receive Weekly newsletters</label>
             </div>
 
             <div class="checkbox">
-                <input type="checkbox" name="terms" id="terms" required>
+                <input type="checkbox" name="terms" id="terms" >
                 <label for="terms">I agree to the terms and conditions</label>
             </div>
 

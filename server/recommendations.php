@@ -5,7 +5,7 @@ include('./Dao/UserDAO.php');
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: index.php");
+    header("Location: ../index.php");
     exit;
 }
 
@@ -55,15 +55,27 @@ $book = getRandomBook($db);
 </head>
 <body>
     <?php include('./header.php'); ?> 
+    <nav class="main-nav">
+        <ul>
+            <li><a href="home.php">Home</a></li>
+            <li><a href="recommendations.php">Recommendations</a></li>
+            <li><a href="manage_books.php">Manage Books</a></li>
+            <li><a href="favorite_list.php">Favorite List</a></li>
+            <li><a href="logout.php">Logout</a></li>
+        </ul>
+    </nav>
     <div class="recommendations-container">
-        <h1>Dear <?php echo htmlspecialchars($username); ?>, based on your preferences, we have carefully selected this book for you. Have a great day!</h1>
+        <h1>Dear <?php echo htmlspecialchars($username); ?>,<br> based on your preferences, we have carefully selected this book for you. Have a great day!</h1>
         <div class="book-details">
-            <div class="book-title"><?php echo htmlspecialchars($book['title']); ?></div>
-            <div class="book-author"><?php echo htmlspecialchars($book['author']); ?></div>
-            <div class="book-genre"><?php echo htmlspecialchars($book['genre']); ?></div>
-            <div class="book-description"><?php echo htmlspecialchars($book['description']); ?></div>
+            <div class="book-attribute"><strong>Title:</strong> <span id="book-title"><?php echo htmlspecialchars($book['title']); ?></span></div>
+            <div class="book-attribute"><strong>Author:</strong> <span id="book-author"><?php echo htmlspecialchars($book['author']); ?></span></div>
+            <div class="book-attribute"><strong>Genre:</strong> <span id="book-genre"><?php echo htmlspecialchars($book['genre']); ?></span></div>
+            <div class="book-attribute"><strong>Description:</strong> <span id="book-description"><?php echo htmlspecialchars($book['description']); ?></span></div>
         </div>
-        <button id="get-book" onclick="fetchNewBook()">Get a New Book</button>
+        <div class="buttons">
+            <a href="javascript:void(0);" class="detail-button" id="get-book" onclick="fetchNewBook()">Get a New Book</a>
+            <a href="detail.php?book_id=<?php echo htmlspecialchars($book['id']); ?>" class="detail-button" id="view-details">View Details</a>
+        </div>
     </div>
     <?php include('./footer.php'); ?> 
 </body>

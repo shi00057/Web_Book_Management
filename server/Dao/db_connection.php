@@ -1,4 +1,8 @@
 <?php
+// Name: Guokai Shi
+// File Name: db_connection.php
+// Date Created: 2024-07-18
+// Description: This PHP file establishes a connection to the MySQL database.
 class Database {
     private $host = 'localhost';
     private $db_name = 'GroupTask';

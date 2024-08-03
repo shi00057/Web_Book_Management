@@ -1,5 +1,5 @@
 /*  
-     Name: web group
+     Name: Guokai Shi
      File Name: script.js
      Date Created: 2024-07-18
      Description: This JavaScript file contains the client-side validation logic for the registration form.

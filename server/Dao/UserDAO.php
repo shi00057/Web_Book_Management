@@ -1,4 +1,8 @@
 <?php
+//Name: Guokai Shi
+// File Name: UserDAO.php
+// Date Created: 2024-07-18
+// Description: This PHP file contains data access object (DAO) methods for user-related database operations.
 class UserDAO {
     private $conn;
     private $table_name = "users";

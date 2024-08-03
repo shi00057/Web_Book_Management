@@ -1,3 +1,9 @@
+/* 
+ * Name: Guokai Shi 
+ * File Name: home.css 
+ * Date Created: 2024-07-18 
+ * Description: This CSS file styles the home page of the website. 
+ */
 /* Global styles */
 * {
     margin: 0;
@@ -10,31 +16,39 @@ body {
     line-height: 1.6;
     background-color: #f4f4f4; /* Background color for the body */
     padding-top: 20px; /* Optional: Add some top padding for spacing */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align all items */
 }
 
 /* Header styles */
 header {
     text-align: center;
-    margin-bottom: 5px;
-    color:blue;
+    margin-bottom: 20px;
+    background-color: #1042d6;
+    padding: 20px;
+    color: white;
+    width: 100%; /* Make header full width */
 }
 
 header h1 {
     font-size: 2.5em; /* Header title size */
-    color: #1042d6;
+    color: white;
     margin-bottom: 5px;
 }
 
 header .tagline {
     font-size: 1.2em;
-    color: #666;
+    color: #d1ecf1;
     font-style: italic;
 }
 
 /* Navigation styles */
 nav.main-nav {
-    margin-top: -10px; /* Adjust as needed to align higher */
     text-align: center;
+    background-color: #1042d6;
+    padding: 10px;
+    width: 100%; /* Make navigation full width */
 }
 
 nav.main-nav ul {
@@ -49,7 +63,7 @@ nav.main-nav ul li {
 
 nav.main-nav ul li a {
     text-decoration: none;
-    color: #007BFF;
+    color: white;
     font-size: 1.1em;
 }
 
@@ -60,12 +74,11 @@ nav.main-nav ul li a:hover {
 /* Main content styles */
 .home-content {
     display: flex;
-    justify-content: center;
-    align-items: flex-start; /* Align items to the top */
     flex-direction: column;
+    align-items: center; /* Center align items */
     text-align: center;
     padding: 20px;
-    min-height: 80vh; /* Ensure the content fills the screen */
+    width: 100%;
 }
 
 .main-title {
@@ -87,16 +100,18 @@ nav.main-nav ul li a:hover {
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+    width: 100%;
+    max-width: 1200px; /* Limit the maximum width */
 }
 
 /* Each box in the flex container */
 .box {
-    width: 220px;
+    flex: 1 1 220px;
     margin: 10px;
     padding: 20px;
     text-align: center;
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .red { background-color: #f8d7da; }
@@ -109,7 +124,7 @@ nav.main-nav ul li a:hover {
     margin-top: 10px;
     padding: 10px 15px;
     color: #fff;
-    background-color: #333;
+    background-color: #007BFF;
     border-radius: 5px;
     text-decoration: none;
     font-weight: bold;
@@ -117,13 +132,12 @@ nav.main-nav ul li a:hover {
 
 /* Footer styles */
 footer {
-    background-color: #f1f1f1;
+    background-color: #1042d6;
     padding: 10px 20px;
     text-align: center;
-    border-top: 1px solid #ccc;
     font-size: 0.9em;
-    color: #333;
-    margin-top: 20px; /* Add some space above the footer */
+    color: white;
+    width: 100%; /* Make footer full width */
 }
 
 footer p {

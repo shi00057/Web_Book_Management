@@ -1,4 +1,8 @@
 <?php
+// Name: Guokai Shi
+// File Name: index.php
+// Date Created: 2024-07-18
+// Description: This PHP file serves as the main page of the website, displaying the home content and links to other sections.
 session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

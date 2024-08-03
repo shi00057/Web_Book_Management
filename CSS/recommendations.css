@@ -1,77 +1,139 @@
-/* Style for the body of the document */
+A
+/* 
+ * Name: Guokai Shi 
+ * File Name: recommendations.css 
+ * Date Created: 2024-07-18 
+ * Description: This CSS file styles the recommendations page of the website. 
+ */
+ /* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4; /* Background color for the body */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align all items */
+}
+
+/* Header styles */
+header {
     text-align: center;
-    background: linear-gradient(to bottom, #d0e6f5, #f5d0d0);
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-}
-
-/* Style for the main heading */
-h1 {
-    font-size: 1.5em;
     margin-bottom: 20px;
-}
-
-/* Style for the book display area */
-#book_screen {
-    background-color: #ffffff;
-    border-radius: 10px;
+    background-color: #1042d6;
     padding: 20px;
-    width: 80%;
-    max-width: 600px;
+    color: white;
+    width: 100%; /* Make header full width */
+}
+
+header h1 {
+    font-size: 2.5em; /* Header title size */
+    color: white;
+    margin-bottom: 5px;
+}
+
+header .tagline {
+    font-size: 1.2em;
+    color: #d1ecf1;
+    font-style: italic;
+}
+
+/* Navigation styles */
+nav.main-nav {
+    text-align: center;
+    background-color: #1042d6;
+    padding: 10px;
+    width: 100%; /* Make navigation full width */
+}
+
+nav.main-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav.main-nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav.main-nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.1em;
+}
+
+nav.main-nav ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Recommendations container */
+.recommendations-container {
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 800px; /* Limit the maximum width */
+}
+
+.recommendations-container h1 {
+    font-size: 1.8em;
+    color: #333;
     margin-bottom: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
-/* Style for the book title */
-#book_title {
-    font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 10px;
+/* Book details */
+.book-details {
+    background-color: #fff3cd; /* Orange-yellow background */
+    border: 2px solid #007BFF; /* Blue border */
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    text-align: left; /* Align text to the left */
 }
 
-/* Style for the book author */
-#book_author {
+.book-attribute {
     font-size: 1.2em;
     margin-bottom: 10px;
 }
 
-/* Style for the book genre */
-#book_genre {
-    font-size: 1em;
-    margin-bottom: 10px;
+.book-attribute strong {
+    color: #333;
 }
 
-/* Style for the book description */
-#book_description {
-    font-size: 0.9em;
-    margin-bottom: 20px;
-    text-align: center;
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }
 
-/* Style for the button */
-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
+.detail-button {
+    padding: 10px 15px;
+    color: #fff;
+    background-color: #007BFF;
     border-radius: 5px;
-    padding: 10px 20px;
-    font-size: 1em;
-    cursor: pointer;
-    box-shadow: 0 4px #0056b3;
-    font-family: Arial, sans-serif;
+    text-decoration: none;
+    font-weight: bold;
 }
 
-/* Style for the button on hover */
-button:hover {
+.detail-button:hover {
     background-color: #0056b3;
-    box-shadow: 0 4px #004080;
+}
+
+/* Footer styles */
+footer {
+    background-color: #1042d6;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 0.9em;
+    color: white;
+    width: 100%; /* Make footer full width */
+}
+
+footer p {
+    margin: 0;
 }

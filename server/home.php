@@ -1,4 +1,8 @@
 <?php
+// Name: Guokai Shi
+// File Name: home.php
+// Date Created: 2024-07-18
+// Description: This PHP file serves as the home page of the website.
 session_start();
 if (!isset($_SESSION['user_id'])) {
     header("Location: index.php");
