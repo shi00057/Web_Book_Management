@@ -1,16 +1,16 @@
 <?php
 // Name: Guokai Shi
-// File Name: db_connection.php
+// File Name: AbstractDao.php
 // Date Created: 2024-07-18
 // Description: This PHP file establishes a connection to the MySQL database.
-class Database {
+class AbstractDao {
     private $host = 'localhost';
     private $db_name = 'GroupTask';
     private $username = 'cst8285';
     private $password = 'password';
     public $conn;
 
-    public function getConnection() {
+    public function __construct() {
         $this->conn = null;
 
         try {

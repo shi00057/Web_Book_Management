@@ -8,7 +8,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
 // Include the necessary files from the Dao directory
-include('./server/Dao/db_connection.php');
+include('./server/Dao/AbstractDao.php');
 include('./server/Dao/UserDAO.php');
 
 // Initialize an error message variable
@@ -20,8 +20,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $password = $_POST['password'];
 
     // Get database connection
-    $database = new Database();
-    $db = $database->getConnection();
+    $database = new AbstractDao();
+    $db = $database->__construct();
 
     // Initialize UserDAO
     $userDAO = new UserDAO($db);

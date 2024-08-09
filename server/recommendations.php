@@ -1,7 +1,8 @@
 <?php
 session_start();
-include('./Dao/db_connection.php');  
-include('./Dao/UserDAO.php');  
+include('./Dao/AbstractDao.php');
+include('./Dao/UserDAO.php');
+include('./Dao/BookDAO.php');
 
 // Ensure the user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -10,39 +11,28 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Get database connection
-$database = new Database();
-$db = $database->getConnection();
-
-// Function to get a random book from the database
-function getRandomBook($db) {
-    $query = "SELECT * FROM books ORDER BY RAND() LIMIT 1";
-    $stmt = $db->prepare($query);
-    $stmt->execute();
-    
-    if ($stmt->rowCount() > 0) {
-        return $stmt->fetch(PDO::FETCH_ASSOC);
-    }
-    return null;
-}
-
+$database = new AbstractDao();
+$db = $database->__construct();
+$bookDAO = new BookDAO();
+$userDao = new UserDAO();
 // Function to get the username by user ID
-function getUsernameById($db, $user_id) {
-    $query = "SELECT username FROM users WHERE id = ?";
-    $stmt = $db->prepare($query);
-    $stmt->bindParam(1, $user_id);
-    $stmt->execute();
-    
-    if ($stmt->rowCount() > 0) {
-        $row = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $row['username'];
-    }
-    return 'Guest';
-}
+//function getUsernameById($db, $user_id) {
+//    $query = "SELECT username FROM users WHERE id = ?";
+//    $stmt = $db->prepare($query);
+//    $stmt->bindParam(1, $user_id);
+//    $stmt->execute();
+//
+//    if ($stmt->rowCount() > 0) {
+//        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+//        return $row['username'];
+//    }
+//    return 'Guest';
+//}
 
 // Get the username and a random book
 $user_id = $_SESSION['user_id'];
-$username = getUsernameById($db, $user_id);
-$book = getRandomBook($db);
+$username = $userDao->getUserNameById($user_id);
+$book = $bookDAO->getRandomBook();
 ?>
 <!DOCTYPE html>
 <html lang="en">

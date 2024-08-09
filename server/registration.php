@@ -6,7 +6,7 @@
 
 session_start();
 
-include 'Dao/db_connection.php';
+include 'Dao/AbstractDao.php';
 include 'Dao/UserDAO.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -24,31 +24,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $error = "Passwords do not match.";
     } else {
         // Get database connection
-        $database = new Database();
-        $pdo = $database->getConnection();
-        $userDAO = new UserDAO($pdo);
-
-        // Check if user already exists
-        $checkUser = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-        $checkUser->execute([$email]);
-        $result = $checkUser->fetch(PDO::FETCH_ASSOC);
-
-        if ($result) {
+        $userDAO = new UserDAO();
+        $checkUser = $userDAO->getUserByEmail($email);
+        if (count($checkUser) > 0) {
             $error = "User already exists.";
         } else {
             // Insert new user into the database
-            $stmt = $pdo->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-            if ($stmt->execute([$username, $email, $password])) {
-                // Set session variables
-                $_SESSION['user_id'] = $pdo->lastInsertId();
-                $_SESSION['username'] = $username;
-                $_SESSION['email'] = $email;
-                $success = "Registration successful! Redirecting to homepage...";
-                header("Location: home.php");
-                exit();
-            } else {
-                $error = "Error: " . $stmt->errorInfo()[2];
-            }
+            $user_id = $userDAO->addUser($username, $email, $password);
+            // Set session variables
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['username'] = $username;
+            $_SESSION['email'] = $email;
+            $success = "Registration successful! Redirecting to homepage...";
+            header("Location: home.php");
+            exit();
+
         }
     }
 }
@@ -64,51 +54,51 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <script src="../Scripts/registration.js"></script>
 </head>
 <body>
-    <?php include('header.php'); ?>
-    <div class="formcontainer">
-        <h1>Weekly Kitten Pictures Subscription</h1>
-        <hr>
-        <form action="registration.php" method="post" onsubmit="return validate();">
-            <?php if (isset($error)): ?>
-                <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
-            <?php elseif (isset($success)): ?>
-                <p class="success-message"><?php echo htmlspecialchars($success); ?></p>
-            <?php endif; ?>
+<?php include('header.php'); ?>
+<div class="formcontainer">
+    <h1>Weekly Kitten Pictures Subscription</h1>
+    <hr>
+    <form action="registration.php" method="post" onsubmit="return validate();">
+        <?php if (isset($error)): ?>
+            <p class="error-message"><?php echo htmlspecialchars($error); ?></p>
+        <?php elseif (isset($success)): ?>
+            <p class="success-message"><?php echo htmlspecialchars($success); ?></p>
+        <?php endif; ?>
 
-            <div class="textfield">
-                <label for="email">Email Address</label>
-                <input type="email" name="email" id="email" placeholder="Email">
-            </div>
+        <div class="textfield">
+            <label for="email">Email Address</label>
+            <input type="email" name="email" id="email" placeholder="Email">
+        </div>
 
-            <div class="textfield">
-                <label for="login">User Name</label>
-                <input type="text" name="login" id="login" placeholder="User name">
-            </div>
+        <div class="textfield">
+            <label for="login">User Name</label>
+            <input type="text" name="login" id="login" placeholder="User name">
+        </div>
 
-            <div class="textfield">
-                <label for="pass">Password</label>
-                <input type="password" name="pass" id="pass" placeholder="Password">
-            </div>
-        
-            <div class="textfield">
-                <label for="pass2">Re-type Password</label>
-                <input type="password" name="pass2" id="pass2" placeholder="Re-type Password">
-            </div>
+        <div class="textfield">
+            <label for="pass">Password</label>
+            <input type="password" name="pass" id="pass" placeholder="Password">
+        </div>
 
-            <div class="checkbox">
-                <input type="checkbox" name="newsletter" id="newsletter">
-                <label for="newsletter">I agree to receive Weekly newsletters</label>
-            </div>
+        <div class="textfield">
+            <label for="pass2">Re-type Password</label>
+            <input type="password" name="pass2" id="pass2" placeholder="Re-type Password">
+        </div>
 
-            <div class="checkbox">
-                <input type="checkbox" name="terms" id="terms" >
-                <label for="terms">I agree to the terms and conditions</label>
-            </div>
+        <div class="checkbox">
+            <input type="checkbox" name="newsletter" id="newsletter">
+            <label for="newsletter">I agree to receive Weekly newsletters</label>
+        </div>
 
-            <button type="submit">Sign-Up</button>
-            <button type="reset">Reset</button>
-        </form>
-    </div>
-    <?php include('footer.php'); ?>
+        <div class="checkbox">
+            <input type="checkbox" name="terms" id="terms">
+            <label for="terms">I agree to the terms and conditions</label>
+        </div>
+
+        <button type="submit">Sign-Up</button>
+        <button type="reset">Reset</button>
+    </form>
+</div>
+<?php include('footer.php'); ?>
 </body>
 </html>

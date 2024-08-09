@@ -28,22 +28,17 @@
 
 <?php
 session_start();
-require_once('Dao/db_connection.php');
+require_once('Dao/AbstractDao.php');
+require_once('Dao/FavoriteDao.php');
 // Get database connection
-$database = new Database();
-$db = $database->getConnection();
-$sql = $db->prepare("SELECT b.* FROM favorites f join books b on f.book_id = b.id where f.user_id = :user_id");
-$sql->bindParam(':user_id', $_SESSION['user_id']);
-$sql->execute();
-if ($sql->rowCount() > 0) {
-    $results = $sql->fetchAll(PDO::FETCH_ASSOC);
-    $bookListContent = '';
-    foreach ($results as $book) {
-        $bookListContent .= "<div id=\"favorite{$book['id']}\" class=\"box\"><div class=\"item\">Title: {$book['title']}</div><div class=\"item\">Author: {$book['author']}</div><div class=\"item\">Genre: {$book['genre']}</div><div class=\"item\">Description: {$book['description']}</div><button onclick=\"deleteFavorite({$book['id']})\">delete favorite</button></div>";
-    }
-    echo "<script>document.getElementById(\"favoriteBookList\").innerHTML = '$bookListContent';</script>";
 
+$favoriteDao = new FavoriteDao();
+$results = $favoriteDao->getFavorites($_SESSION['user_id']);
+$bookListContent = '';
+foreach ($results as $book) {
+    $bookListContent .= "<div id=\"favorite{$book['id']}\" class=\"box\"><div class=\"item\">Title: {$book['title']}</div><div class=\"item\">Author: {$book['author']}</div><div class=\"item\">Genre: {$book['genre']}</div><div class=\"item\">Description: {$book['description']}</div><button onclick=\"deleteFavorite({$book['id']})\">delete favorite</button></div>";
 }
+echo "<script>document.getElementById(\"favoriteBookList\").innerHTML = '$bookListContent';</script>";
 ?>
 <script>
     function deleteFavorite(bookId) {

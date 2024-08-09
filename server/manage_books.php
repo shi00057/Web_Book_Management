@@ -9,20 +9,12 @@ session_start();
 */
 
 // Include the database connection file
-require_once './Dao/db_connection.php';
-
+require_once './Dao/AbstractDao.php';
+require_once('./Dao/BookDao.php');
 // Instantiate the Database class and get the database connection
-$database = new Database();
-$conn = $database->getConnection();
 $user_id = $_SESSION['user_id'];
-
-// Prepare the SQL statement to fetch all books from the database that the user has added
-$sql = "SELECT b.* FROM books b JOIN book_shelf bs ON b.id = bs.book_id WHERE bs.user_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->execute([$user_id]);
-
-// Fetch all books and store them in an associative array
-$books = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$bookDao = new BookDao();
+$books = $bookDao->getBooksFromShelf($user_id);
 ?>
 
 <!DOCTYPE html>

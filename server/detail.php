@@ -1,8 +1,8 @@
 <?php session_start();
-require_once('Dao/db_connection.php');
+require_once('Dao/AbstractDao.php');
 require_once('Dao/UserDAO.php');
-$database = new Database();
-$db = $database->getConnection();
+$database = new AbstractDao();
+$db = $database->__construct();
 $userDAO = new UserDAO($db);
 
 // Get the user ID from the session
@@ -152,42 +152,33 @@ $user_name = $userDAO->getUserNameById($userId);
 </script>
 
 <?php
-require_once('Dao/db_connection.php');
-// Get database connection
-$database = new Database();
-$db = $database->getConnection();
-$sql1 = $db->prepare("SELECT b.id, b.title, b.author, b.genre, b.description FROM books b where b.id = :book_id");
-$sql1->bindParam(':book_id', $_GET['book_id']);
-$sql1->execute();
-if ($sql1->rowCount() > 0) {
-    $results = $sql1->fetchAll(PDO::FETCH_ASSOC);
-    $bookInformation = '';
-    foreach ($results as $book) {
-        echo "<script>document.getElementById(\"title\").innerHTML = '{$book['title']}';
+require_once('Dao/AbstractDao.php');
+require_once ('Dao/BookDao.php');
+require_once ('Dao/ReviewsDao.php');
+$bookDao = new BookDao();
+$results = $bookDao->getOneBook($_GET['book_id']);
+$bookInformation = '';
+foreach ($results as $book) {
+    echo "<script>document.getElementById(\"title\").innerHTML = '{$book['title']}';
 document.getElementById(\"author\").innerHTML = '{$book['author']}';
 document.getElementById(\"genre\").innerHTML = '{$book['genre']}';
 document.getElementById(\"description\").innerHTML = '{$book['description']}';
 </script>";
-    }
-}
-
-$sql2 = $db->prepare("SELECT u.username, r.rating, r.comment FROM reviews r join users u on r.user_id = u.id where r.book_id = :book_id");
-$sql2->bindParam(':book_id', $_GET['book_id']);
-$sql2->execute();
-if ($sql2->rowCount() > 0) {
-    $results = $sql2->fetchAll(PDO::FETCH_ASSOC);
-    $reviewContent = '';
-    foreach ($results as $review) {
-        $rating = $review['rating'];
-        $comment = $review['comment'];
-        $username = $review['username'];
-        $ratingCount = '';
-        for ($i = 0; $i < $rating; $i++) {
-            $ratingCount .= "<span style=\"color: yellow;\">&#9733;</span>";
-        }
-        $reviewContent .= "<div class=\"box\"><div class=\"item\">$username</div><div class=\"item\">$ratingCount</div><div class=\"item\">$comment</div></div>";
-    }
-    echo "<script>document.getElementById(\"reviews\").innerHTML = '$reviewContent';</script>";
 
 }
+
+$reviewsDao = new ReviewsDao();
+$results = $reviewsDao->getReviews($_GET['book_id']);
+$reviewContent = '';
+foreach ($results as $review) {
+    $rating = $review['rating'];
+    $comment = $review['comment'];
+    $username = $review['username'];
+    $ratingCount = '';
+    for ($i = 0; $i < $rating; $i++) {
+        $ratingCount .= "<span style=\"color: yellow;\">&#9733;</span>";
+    }
+    $reviewContent .= "<div class=\"box\"><div class=\"item\">$username</div><div class=\"item\">$ratingCount</div><div class=\"item\">$comment</div></div>";
+}
+echo "<script>document.getElementById(\"reviews\").innerHTML = '$reviewContent';</script>";
 ?>

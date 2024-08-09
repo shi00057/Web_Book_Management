@@ -11,34 +11,18 @@ session_start();
 // Check if the request method is POST (form submission)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Include the database connection file
-    require_once './Dao/db_connection.php';
-
-    // Instantiate the Database class and get the database connection
-    $database = new Database();
-    $conn = $database->getConnection();
-
+    require_once('./Dao/BookDao.php');
+    require_once('./Dao/BookShelfDao.php');
+    $bookDao = new BookDao();
     // Retrieve form data from POST request
     $title = $_POST['title'];
     $author = $_POST['author'];
     $genre = $_POST['genre'];
     $description = $_POST['description'];
     $user_id = $_SESSION['user_id'];
-
-    // Prepare the SQL statement to insert a new book into the database
-    $sql = "INSERT INTO books (title, author, genre, description) VALUES (?, ?, ?, ?)";
-    $stmt = $conn->prepare($sql);
-
-    // Execute the statement with the form data
-    $stmt->execute([$title, $author, $genre, $description]);
-
-    // Get the last inserted book ID
-    $book_id = $conn->lastInsertId();
-
-    // Insert into book_shelf to associate the book with the user
-    $sql = "INSERT INTO book_shelf (user_id, book_id) VALUES (?, ?)";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$user_id, $book_id]);
-
+    $book_id = $bookDao->addBook($title, $author, $genre, $description,$user_id);
+    $bookShelfDao = new BookShelfDao();
+    $bookShelfDao->addBookShelf($book_id, $user_id);
     // Output a success message
     echo "Book added successfully!";
     exit;

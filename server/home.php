@@ -9,12 +9,12 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 // Include necessary files
-include('../server/Dao/db_connection.php');
+include('../server/Dao/AbstractDao.php');
 include('../server/Dao/UserDAO.php');
 
 // Get database connection
-$database = new Database();
-$db = $database->getConnection();
+$database = new AbstractDao();
+$db = $database->__construct();
 
 // Initialize UserDAO
 $userDAO = new UserDAO($db);

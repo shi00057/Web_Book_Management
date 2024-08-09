@@ -40,38 +40,13 @@
 </html>
 
 <?php
-require_once('Dao/db_connection.php');
+require_once('Dao/AbstractDao.php');
+require_once ('Dao/BookListDao.php');
+$bookListDao = new BookListDao();
 $title = isset($_GET['title']) ? $_GET['title'] : '';
 $author = isset($_GET['author']) ? $_GET['author'] : '';
 $genre = isset($_GET['genre']) ? $_GET['genre'] : '';
-$database = new Database();
-$db = $database->getConnection();
-$sql = "SELECT * FROM books WHERE 1=1";
-$params = [];
-
-if (!empty($title)) {
-    $sql .= " AND title LIKE :title";
-    $params[':title'] = "%$title%";
-}
-
-if (!empty($author)) {
-    $sql .= " AND author LIKE :author";
-    $params[':author'] = "%$author%";
-}
-
-if (!empty($genre)) {
-    $sql .= " AND genre = :genre";
-    $params[':genre'] = $genre;
-}
-
-$stmt = $db->prepare($sql);
-foreach ($params as $key => &$val) {
-    $stmt->bindParam($key, $val);
-}
-$stmt->execute();
-
-$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
+$results = $bookListDao->getAll($title, $author, $genre);
 $bookListContent = '';
 foreach ($results as $book) {
     $bookListContent .= "<div class=\"box\"><div class=\"item\">Title: {$book['title']}</div><div class=\"item\">Author: {$book['author']}</div><div class=\"item\">Genre: {$book['genre']}</div><div class=\"item\">Description: {$book['description']}</div><button type=\"button\" onclick=\"detail({$book['id']})\">Detail</button><button id=\"favorite{$book['id']}\" onclick=\"favorite({$book['id']})\">favorite</button></div>";
@@ -80,23 +55,16 @@ echo "<script>document.getElementById(\"bookList\").innerHTML = '$bookListConten
 ?>
 
 <?php
-require_once('./Dao/db_connection.php');
-
+require_once('./Dao/AbstractDao.php');
+require_once('./Dao/BookDao.php');
 // Get database connection
-$database = new Database();
-$db = $database->getConnection();
-$sql = $db->prepare("SELECT distinct genre FROM books");
-$sql->execute();
-if ($sql->rowCount() > 0) {
-    $books = $sql->fetchAll(PDO::FETCH_ASSOC);
-
-    $genreOptions = '<option value="">All</option>';
-    foreach ($books as $book) {
-        $genreOptions .= "<option value=\"{$book['genre']}\">{$book['genre']}</option>";
-
-    }
-    echo "<script>document.getElementById('genre').innerHTML='$genreOptions';</script>";
+$bookDao = new BookDao();
+$books = $bookDao->getBooks();
+$genreOptions = '<option value="">All</option>';
+foreach ($books as $book) {
+    $genreOptions .= "<option value=\"{$book['genre']}\">{$book['genre']}</option>";
 }
+echo "<script>document.getElementById('genre').innerHTML='$genreOptions';</script>";
 ?>
 <script>
     function favorite(bookId) {

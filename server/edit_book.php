@@ -9,12 +9,10 @@ session_start();
 */
 
 // Include the database connection file
-require_once './Dao/db_connection.php';
-
-// Instantiate the Database class and get the database connection
-$database = new Database();
-$conn = $database->getConnection();
-
+require_once('./Dao/BookShelfDao.php');
+require_once('./Dao/BookDao.php');
+$bookShelfDao = new BookShelfDao();
+$bookDao = new BookDao();
 // Check if the request method is POST (form submission)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve form data from POST request
@@ -25,20 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $user_id = $_SESSION['user_id'];
 
-    // Check if the user has permission to edit this book
-    $sql = "SELECT * FROM book_shelf WHERE user_id = ? AND book_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$user_id, $id]);
-    $book_shelf = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    $book_shelf = $bookShelfDao->getShelf($user_id, $id);
     if ($book_shelf) {
-        // Prepare the SQL statement to update the book details in the database
-        $sql = "UPDATE books SET title = ?, author = ?, genre = ?, description = ? WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-
-        // Execute the statement with the form data
-        $stmt->execute([$title, $author, $genre, $description, $id]);
-
+        $bookDao->updateBook($title, $author, $genre, $description, $id);
         // Output a success message
         echo "Book updated successfully!";
     } else {
@@ -49,21 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Retrieve the book ID from the GET request
     $id = $_GET['id'];
     $user_id = $_SESSION['user_id'];
-
-    // Check if the user has permission to edit this book
-    $sql = "SELECT * FROM book_shelf WHERE user_id = ? AND book_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->execute([$user_id, $id]);
-    $book_shelf = $stmt->fetch(PDO::FETCH_ASSOC);
-
+    $book_shelf = $bookShelfDao->getShelf($user_id, $id);
+    $book = null;
     if ($book_shelf) {
-        // Prepare the SQL statement to fetch the book details from the database
-        $sql = "SELECT * FROM books WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute([$id]);
-
         // Fetch the book details and store them in an associative array
-        $book = $stmt->fetch(PDO::FETCH_ASSOC);
+        $results = $bookDao->getOneBook($id);
+        foreach ($results as $book1) {
+            $book = $book1;
+        }
     } else {
         echo "You do not have permission to edit this book.";
         exit;
